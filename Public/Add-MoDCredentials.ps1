@@ -1,4 +1,4 @@
-function Add-Credentials {
+function Add-MoDCredentials {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $true)]

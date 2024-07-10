@@ -1,4 +1,4 @@
-function Invoke-Mfa {
+function Invoke-MoDMfa {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory = $false)]

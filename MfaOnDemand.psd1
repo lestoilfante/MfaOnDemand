@@ -1,6 +1,6 @@
 @{
     RootModule              = 'MfaOnDemand.psm1'
-    ModuleVersion           = '0.9.0'
+    ModuleVersion           = '0.9.1'
     GUID                    = '79e0551c-4c1e-4486-90fc-cedf93bd5e67'
     Author                  = 'lestoilfante'
     CompanyName             = 'lestoilfante'
@@ -11,11 +11,10 @@ Useful for quickly confirming user identities for Service Desk usage or for any 
 '@
     CompatiblePSEditions    = @('Desktop')
     PowerShellVersion       = '5.1'
-    DefaultCommandPrefix    = 'MoD'
     FunctionsToExport       = @(
-        'Invoke-Mfa'
-        'Get-Credentials'
-        'Add-Credentials'
+        'Invoke-MoDMfa'
+        'Get-MoDCredentials'
+        'Add-MoDCredentials'
     )
     CmdletsToExport         = @()
     VariablesToExport       = @()
