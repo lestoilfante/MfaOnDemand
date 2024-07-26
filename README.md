@@ -82,6 +82,7 @@ Using `Get-MoDCredentials` will also display *suggested* commands to remove cred
 #** Command for certificate removal
     Connect-MgGraph -NoWelcome -TenantId xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx -Scopes 'Application.ReadWrite.All'; $keyCreds=(Get-MgServicePrincipal -ServicePrincipalId 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx').KeyCredentials; Update-MgServicePrincipal -ServicePrincipalId xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx -KeyCredentials ($keyCreds|Where-Object { $_.KeyId -ne '<KeyId>' }) -Confirm
 ```
+Additional info can be found on [my website](https://www.itsbalto.com/MfaOnDemand/).
 
 ## Notes
 
@@ -102,6 +103,11 @@ https://www.entraneer.com/blog/entra/authentication/transactional-mfa-entra-id
 
 `Invoke-MoDMfa` does not have any dependencies.
 `Add-MoDCredentials` and `Get-MoDCredentials` require **Microsoft.Graph** module and `Application.ReadWrite.All` permissions on Entra ID Tenant.
+
+## Contributing
+
+I'd like to expand MfaOnDemand with additional MFA `Providers` and probably there's potential for more features within its scope.  
+If you have specific use cases or know of MFA service providers that you’d like to see implemented, please feel free to share your ideas or submit a PR.
 
 ## License & Copyright
 
