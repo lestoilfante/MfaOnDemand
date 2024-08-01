@@ -16,9 +16,9 @@ function Invoke-MoDMfa {
     )
     Process {
         try {
+            $now = (Get-Date).ToUniversalTime()
             switch ($Provider) {
                 "EntraId" {
-                    $now = (Get-Date).ToUniversalTime()
                     if (-not $script:ModuleSessionData.EntraIdSessions[$TenantId] -or $script:ModuleSessionData.EntraIdSessions[$TenantId].ExpiresAt -lt $now) {
                         if (-not $Credential) {
                             Write-Warning "No active session found, use -Credential [?|X509Certificate|X509Certificate.Thumbprint|SecureString]"
@@ -43,14 +43,9 @@ function Invoke-MoDMfa {
                         Write-Error "Failure"
                     }
                     elseif ($mfaResult.Result -eq "CHALLENGE") {
-                        $mfaOTP = Read-Host "Enter OTP"
-                        if ($mfaOTP -notmatch "^[0-9]{2,8}$") {
-                            Write-Warning "Invalid input"
-                            Write-Error "Failure"
-                            return
-                        }
+                        $Otp = Test-Otp -Otp $Otp
                         $challengeData = $mfaResult
-                        Add-Member -InputObject $challengeData -NotePropertyName "OTP" -NotePropertyValue $mfaOTP
+                        Add-Member -InputObject $challengeData -NotePropertyName "OTP" -NotePropertyValue $Otp
                         $mfaChallenge = Invoke-EntraMfa -TenantId $TenantId -User $User -Mode Challenge -Challenge $challengeData
                         if ($mfaChallenge.Result -eq "OK") {
                             Write-Output "Success"
