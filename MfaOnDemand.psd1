@@ -1,6 +1,6 @@
 @{
     RootModule              = 'MfaOnDemand.psm1'
-    ModuleVersion           = '0.9.1'
+    ModuleVersion           = '0.10.0'
     GUID                    = '79e0551c-4c1e-4486-90fc-cedf93bd5e67'
     Author                  = 'lestoilfante'
     CompanyName             = 'lestoilfante'
@@ -25,7 +25,7 @@ Useful for quickly confirming user identities for Service Desk usage or for any 
         PSData = @{
             ProjectUri                 = 'https://github.com/lestoilfante/MfaOnDemand'
             LicenseUri                 = 'https://github.com/lestoilfante/MfaOnDemand/blob/master/LICENSE.txt'
-            Tags                       = @('MFA', 'Microsoft', 'Entra', 'AAD', 'Identity')
+            Tags                       = @('MFA', 'Microsoft', 'Entra', 'AAD', 'Identity', 'WatchGuard')
         }
     }
     HelpInfoURI = 'https://github.com/lestoilfante/MfaOnDemand/blob/master/README.md'
