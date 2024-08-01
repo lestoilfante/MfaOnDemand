@@ -18,12 +18,17 @@ $Providers = @{
         PasswordExpiration  = 1
         CertificateExpiration = 365
     }
+    AuthPoint       = @{
+        TokenEndpoint       = 'https://api._region_.cloud.watchguard.com/oauth/token'
+        MfaEndpoint         = 'https://api._region_.cloud.watchguard.com/rest/authpoint/authentication/v1/accounts/_accountId_/resources/_resourceId_'
+    }
 }
 New-Variable -Name Providers -Value $Providers -Scope Script -Force
 
 if (-not $script:ModuleSessionData) {
     $moduleData = @{
         EntraIdSessions = @{}
+        AuthPointSessions = @{}
     }
     $script:ModuleSessionData = $moduleData
 }
