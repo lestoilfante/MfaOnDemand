@@ -1,10 +1,10 @@
 @{
     RootModule              = 'MfaOnDemand.psm1'
-    ModuleVersion           = '0.10.0'
+    ModuleVersion           = '1.0.0'
     GUID                    = '79e0551c-4c1e-4486-90fc-cedf93bd5e67'
     Author                  = 'lestoilfante'
     CompanyName             = 'lestoilfante'
-    Copyright               = '(c) 2024 lestoilfante. All rights reserved.'
+    Copyright               = '(c) 2024-2026 lestoilfante. All rights reserved.'
     Description             = @'
 MfaOnDemand is a PowerShell module designed to send custom and arbitrary MFA requests to Entra ID users.
 Useful for quickly confirming user identities for Service Desk usage or for any automation purposes.

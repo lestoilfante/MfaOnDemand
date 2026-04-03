@@ -15,6 +15,7 @@ $Providers = @{
         MfaAppId            = '981f26a1-7f43-403b-a875-f8b09b8cd720'
         TokenEndpoint       = 'https://login.microsoftonline.com/_tenantId_/oauth2/v2.0/token'
         MfaEndpoint         = 'https://strongauthenticationservice.auth.microsoft.com/StrongAuthenticationService.svc/Connector/BeginTwoWayAuthentication'
+        MfaEndpointOTP      = 'https://strongauthenticationservice.auth.microsoft.com/StrongAuthenticationService.svc/Connector/EndTwoWayAuthentication'
         PasswordExpiration  = 1
         CertificateExpiration = 365
     }

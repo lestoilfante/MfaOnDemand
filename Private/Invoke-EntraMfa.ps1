@@ -31,7 +31,7 @@ function Invoke-EntraMfa {
                 $body = $xml.Replace("__UPN__", $User).Replace("__USE_OTP__", "true").Replace("__GUID__", (New-Guid).Guid)
             }
 
-            $response = Invoke-RestMethod -Uri $Providers.EntraId.MfaEndpoint -Method POST -Headers $headers -Body $body -ContentType 'application/xml' -TimeoutSec 60
+            $response = Invoke-RestMethod -Uri $Providers.EntraId.MfaEndpoint -Method POST -Headers $headers -Body $body -ContentType 'application/xml' -TimeoutSec 60 -UserAgent "AzureMfaNpsExt"
 
             if (-not $response.BeginTwoWayAuthenticationResponse) {
                 throw "Unexpected reply message"
@@ -60,7 +60,7 @@ function Invoke-EntraMfa {
             }
             $xml = '<EndTwoWayAuthenticationRequest><Version>1.0</Version><SessionId>__CHALLENGE_ID__</SessionId><ContextId>__GUID__</ContextId><AdditionalAuthData>__OTP__</AdditionalAuthData><UserPrincipalName>__UPN__</UserPrincipalName></EndTwoWayAuthenticationRequest>'
             $body = $xml.Replace("__UPN__", $User).Replace("__OTP__", $Challenge.OTP).Replace("__GUID__", (New-Guid).Guid).Replace("__CHALLENGE_ID__", $Challenge.ChallengeId)
-            $response = Invoke-RestMethod -Uri $Challenge.ChallengeUri -Method POST -Headers $headers -Body $body -ContentType 'application/xml' -TimeoutSec 60
+            $response = Invoke-RestMethod -Uri $Providers.EntraId.MfaEndpointOTP -Method POST -Headers $headers -Body $body -ContentType 'application/xml' -TimeoutSec 60 -UserAgent "AzureMfaNpsExt"
             if (-not $response.EndTwoWayAuthenticationResponse) {
                 throw "Unexpected challenge reply message"
             }
