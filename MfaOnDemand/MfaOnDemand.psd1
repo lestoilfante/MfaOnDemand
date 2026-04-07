@@ -1,6 +1,6 @@
 @{
     RootModule              = 'MfaOnDemand.psm1'
-    ModuleVersion           = '1.0.0'
+    ModuleVersion           = '1.0.1'
     GUID                    = '79e0551c-4c1e-4486-90fc-cedf93bd5e67'
     Author                  = 'lestoilfante'
     CompanyName             = 'lestoilfante'
