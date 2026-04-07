@@ -24,7 +24,7 @@ function Add-EntraMfaCredentials {
                 EndDateTime = (Get-Date).ToUniversalTime().AddDays($Providers.EntraId.PasswordExpiration).ToString("yyyy-MM-ddTHH:mm:ss")
             }
             $secret = Add-MgServicePrincipalPassword -ServicePrincipalId $mfaSvcPrincipal.Id -PasswordCredential $passwordCredential
-            Disconnect-MgGraph
+            Disconnect-MgGraph | Out-Null
             return $secret.SecretText
         }
         elseif ($Type -eq "Certificate" -and $Certificate) {
