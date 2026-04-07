@@ -133,7 +133,7 @@ If you have specific use cases or know of MFA service providers that you’d like 
 
 ## License & Copyright
 
-[Copyright 2024 lestoilfante](https://github.com/lestoilfante)
+[Copyright 2024-2026 lestoilfante](https://github.com/lestoilfante)
 
 GNU General Public License version 3 (GPLv3)
 

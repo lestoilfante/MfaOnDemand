@@ -8,6 +8,7 @@
     Description             = @'
 MfaOnDemand is a PowerShell module designed to send custom and arbitrary MFA requests to Entra ID users.
 Useful for quickly confirming user identities for Service Desk usage or for any automation purposes.
+Supported Providers: Microsoft Entra ID, WatchGuard AuthPoint.
 '@
     CompatiblePSEditions    = @('Desktop')
     PowerShellVersion       = '5.1'

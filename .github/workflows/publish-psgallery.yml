@@ -1,0 +1,48 @@
+name: Publish PowerShell Module to PSGallery
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    env:
+      MODULE_NAME: ${{ github.event.repository.name }}
+      PSGALLERY_API_KEY: ${{ secrets.PSGALLERY_API_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+          Install-Module PSScriptAnalyzer -Scope CurrentUser -Force -SkipPublisherCheck
+
+      - name: Validate module manifest
+        shell: pwsh
+        run: |
+          $manifestPath = Join-Path $env:MODULE_NAME "$env:MODULE_NAME.psd1"
+          Test-ModuleManifest -Path $manifestPath -ErrorAction Stop
+
+      - name: Run PSScriptAnalyzer (errors only)
+        shell: pwsh
+        run: |
+          $results = Invoke-ScriptAnalyzer -Path $env:MODULE_NAME -Recurse -Severity Error
+          if ($results) {
+            $results | Format-Table -AutoSize
+            throw "PSScriptAnalyzer found $($results.Count) error(s). Fix before publishing."
+          }
+
+      - name: Publish to PSGallery
+        shell: pwsh
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:PSGALLERY_API_KEY)) {
+            throw "Missing PSGALLERY_API_KEY secret."
+          }
+          Publish-Module -Path $env:MODULE_NAME `
+                         -NuGetApiKey $env:PSGALLERY_API_KEY `
+                         -Repository PSGallery `
+                         -Verbose
